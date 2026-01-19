@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: rgb(26, 36, 44);">
+    <form action="/register" method="POST">
+        
+        <% errors.forEach(error =>{%>
+            <p><%= error %></p>
+        <%})%>
+            
+
+        
+
+        <input type="text" name="user_name" id="user_name" placeholder="user name">
+        <input type="password" name="password" id="password" placeholder="password">
+        <!-- <input type="password" name="password" id="password" placeholder="password"> -->
+        <button>Sign up</button>
+        <a href="/login" style="color: white;">login?</a>
+
+    </form>
+</body>
+</html>
