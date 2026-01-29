@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <!-- <link rel="stylesheet" href="/stylesheet/style.css">
+    <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+<body>
+    <a href="/">create users</a>
+    <h1 style>All users</h1>
+    <div class="container">
+        <!-- <div>
+            <div class="user_card"><div class="user"></div>
+                <h3>some name</h3>
+                <h5>this contains email</h5>
+                <div>
+                    <a href="">edit user</a>
+                    <a href="">delete user</a>
+                </div>
+            </div> 
+        </div> -->
+
+<!-- the "user" here because it is being passed from server.js  -->
+        <% if(user.length>0){ %>
+            <% user.forEach(user => { %> 
+                <div class="user_card">
+                    
+                    <div class="user_image">
+                        <img  class="image" src="<%= user.image %>" alt="">
+                    </div>
+
+                    <h3><%= user.name %></h3>
+                    <h5><%= user.email %></h5>
+                    <div>
+                        <a class="hyper_link" href="/edit/<%= user._id %>">edit user</a>
+                        <a class="hyper_link" href="/delete/<%= user._id %>">delete user</a>
+                    </div>
+                </div> 
+            <% }); %>
+        <% } else{ %>
+            <h3>there are no user</h3>
+        <% }%>
+        
+    </div>
+</body>
+</html>

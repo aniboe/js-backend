@@ -1,0 +1,60 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    color: white;
+}
+body{
+    background-color: rgb(56, 44, 44);
+}
+input{
+    background: rgb(24, 20, 20, .9);
+    border-radius: 5px;
+    height: 30px;
+    border: 1.5px solid;
+    caret-color: aliceblue; 
+    /* blinking bar ^ */
+    padding-left: 10px;
+}
+input::placeholder{
+    padding-left: 0px;
+}
+.white{
+    background-color: rgb(44, 44, 236);
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.user_card{
+    height: 240px;
+    width: 220px;
+    background: rgba(141, 146, 184, 0.9);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+
+}
+.user_image{
+    height: 160px;
+    width: 200px;
+    /* background: rgb(24, 25, 32, .9); */
+    border-radius: 20px;
+    position: relative;
+}
+.image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+    margin-bottom: 10px;
+    border-radius: 5px;
+
+}
+.hyper_link{
+    margin: 5px;
+}
