@@ -10,7 +10,7 @@ const postModel = require("./models/post")
 
 const cookieParser = require("cookie-parser")
 const path = require("path")
-const { hash } = require("crypto")
+
 
 app.set("view engine", "ejs")
 app.use(express.json())
@@ -50,7 +50,7 @@ app.post("/register", async(req, res) => {
             })
 
             let token = jwt.sign({email: email,userid: user._id}, "shhhh");
-            res.cookie("token", token).send("you are registered") // below two .sends create give error so if ther are multiple sends then use it like this
+            res.cookie("token", token).redirect("/profile") // below two .sends create give error so if ther are multiple sends then use it like this
             // res.send("registered") Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
         })
           
@@ -66,7 +66,7 @@ app.post("/login", async (req, res) => {
     let user = await userModel.findOne({
         username
     })
-    if(!user) res.status(500).send("user doesnt exists")
+    if(!user) return res.status(500).send("user doesnt exists") // return is important
 
     bcrypt.compare(password, user.password, (err, result) => {
         // console.log(result);
@@ -84,20 +84,40 @@ app.get("/logout", (req, res) => {
     res.redirect("/login")
 })
 
-app.get("/profile", isLoggedIn, (req, res) => {
-    console.log(req.user);
+app.get("/profile", isLoggedIn, async (req, res) => {
+    // console.log(req.user); this shows values inserted in jwt
+
+    let user = await userModel.findOne({email: req.user.email}).populate("posts") // dont know what it does
+    console.log(user); // shows the details of user
+
+    // user.populate("posts") // this is not how you are sposed to do this ^
     
-    res.render("temp")
+    res.render("profile", {user})
+})
+
+
+app.post("/post", isLoggedIn, async (req, res) => {
+    let user = await userModel.findOne({email: req.user.email})
+    let post = await postModel.create({
+        user: user._id,
+        content: req.body.content,
+
+    })
+    user.posts.push(post._id)
+    await user.save() // whenwe manualy do this we have to save it manualy
+    res.redirect("/profile") 
+
 })
 
 function isLoggedIn(req, res, next){
     if(!req.cookies.token){
-        res.send("please login/signup")
+        res.redirect("/login")
     }else{
         let data = jwt.verify(req.cookies.token, "shhhh")
-        req.user = data
+        req.user = data // this is accessed /profile 
+        next()
     }
-    next()
+    
 }
 
 app.listen(3000)
