@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <div class="screen">
+        <h2>Edit ur posts</h2>
+        <h4 style="margin: 5px;"><a href="/profile">Dash board</a></h4>
+        <form action="/update/<%= post._id %>" method="post">
+            <textarea style="resize: none; width: 30%; background: transparent;" name="content" id="" placeholder="whats on yr mind"> <%= post.content %></textarea>
+            <input style="display: block;" type="submit" value="update post">
+        </form>
+        <div>
+        </div>
+    </div>
+</body>
+</html>

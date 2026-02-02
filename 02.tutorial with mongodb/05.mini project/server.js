@@ -10,6 +10,7 @@ const postModel = require("./models/post")
 
 const cookieParser = require("cookie-parser")
 const path = require("path")
+const { profile } = require("console")
 
 
 app.set("view engine", "ejs")
@@ -107,6 +108,32 @@ app.post("/post", isLoggedIn, async (req, res) => {
     await user.save() // whenwe manualy do this we have to save it manualy
     res.redirect("/profile") 
 
+})
+
+app.get("/like/:id", isLoggedIn, async (req, res) => {
+    let post = await postModel.findOne({_id: req.params.id}).populate("user")
+
+    if(post.likes.indexOf(req.user.userid) === -1){
+        post.likes.push(req.user.userid) // it takes value from midilware(that has jwt)
+    }
+    else{
+        post.likes.splice(post.likes.indexOf(req.user.userid), 1)
+    }
+
+    await post.save()
+    res.redirect("/profile")
+     
+
+})
+app.get("/edit/:id", isLoggedIn, async (req, res) => {
+    let post = await postModel.findOne({_id: req.params.id}).populate("user")
+    res.render("edit", {post})
+     
+})
+app.post("/update/:id", isLoggedIn, async (req, res) => {
+    let post = await postModel.findOneAndUpdate({_id: req.params.id}, {content: req.body.content}).populate("user")
+    res.redirect("/profile")
+     
 })
 
 function isLoggedIn(req, res, next){

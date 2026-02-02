@@ -26,9 +26,10 @@
                     <div style="width: 30%; height: 200px; border: 1px solid white; border-radius: 6px; margin-top: 10px; padding: 9px; ">
                         <h4 style="margin-bottom: 5px; position: relative;"><%= user.username %></h4>
                         <p><%= values.content %></p>
+                        <small><%= values.likes.length %></small>
                         <div style="display: flex; justify-content: space-between;">
-                            <a href="/like">like</a>
-                            <a href="/edit">edit post</a>
+                            <a href="/like/<%= values._id %>">like</a>
+                            <a href="/edit/<%= values._id %>">edit post</a>
                         </div>
                     </div>
                 <% }); %>
