@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <div class="screen">
+        <div class="user-container">
+            <div class="profile-pic">
+                
+                <img src= "/images/uploads/<%= user.profilepic %>" alt="">
+            </div>
+            <h1>hello, <%= user.username %></h1>
+        </div>
+        
+        <h2>this is ur profile</h2>
+        <h4 style="margin: 5px;"><a href="/logout">logut</a></h4>
+        <h4 style="margin: 5px;" > you can reate a ost</h4>
+        <form action="/post" method="post">
+            <textarea style="resize: none; width: 30%; background: transparent;" name="content" id="" placeholder="whats on yr mind"></textarea>
+            <input style="display: block;" type="submit" value="create post">
+        </form>
+        <hr style="margin: 10px 0px;">
+        <div>
+            <h3 style="margin-top: 20px;">following are your poss</h3>
+
+            <div>
+                <!-- reverse() helps show laest post on top -->
+                <% user.posts.reverse().forEach(values => { %>
+                    <div style="width: 30%; height: 200px; border: 1px solid white; border-radius: 6px; margin-top: 10px; padding: 9px; ">
+                        <h4 style="margin-bottom: 5px; position: relative;"><%= user.username %></h4>
+                        <p><%= values.content %></p>
+                        <small><%= values.likes.length %></small>
+                        <div style="display: flex; justify-content: space-between;">
+                            <a href="/like/<%= values._id %>">like</a>
+                            <a href="/edit/<%= values._id %>">edit post</a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

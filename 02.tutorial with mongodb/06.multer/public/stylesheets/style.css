@@ -1,0 +1,50 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    color: white;
+}
+body{
+    height: 100%;
+    width: 100%;
+    background-color: #2B2D42;
+}
+.screen{
+    height: 100%;
+    width: 100%;
+    background-color: #2B2D42;
+    padding: 20px;
+}
+input{
+    padding-left: 10px;
+    width: 250px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    background: transparent;
+    outline: none;
+}
+input::placeholder{
+    color: white;
+}
+
+.user-container{
+    display: flex;
+    align-items: start;
+    gap: 6px;
+
+}
+.user-container h1{
+    padding-top: 3px;
+}
+.profile-pic{
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.profile-pic img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}

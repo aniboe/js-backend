@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <div class="screen">
+        <h2>upload profile</h2>
+        <h4 style="margin: 5px;"><a href="/login"> login</a></h4>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <!-- enctype="multipart/form-data" , NOTE: without this multer wont work   -->
+            <!-- this means it will break file into multiple chunks to send this file -->
+            <input type="file" name="image" id="">
+            <input type="submit" value="upload file">
+        </form>
+    </div>
+</body>
+</html>
